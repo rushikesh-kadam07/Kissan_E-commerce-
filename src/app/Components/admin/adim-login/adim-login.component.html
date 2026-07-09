@@ -1,0 +1,28 @@
+<div class="login-wrapper">
+
+  <div class="login-card">
+
+    <h3 class="title">🔐 Welcome Back</h3>
+
+    <div *ngIf="message" class="alert alert-danger custom-alert">
+      {{ message }}
+    </div>
+
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" [(ngModel)]="loginRequest.username" placeholder="Enter your email">
+    </div>
+
+    <div class="input-group">
+      <label>Password</label>
+      <input type="password" [(ngModel)]="loginRequest.password" placeholder="Enter your password">
+    </div>
+
+    <button (click)="login()" class="login-btn">
+      <span *ngIf="!isLoading">Login</span>
+      <span *ngIf="isLoading" class="spinner"></span>
+    </button>
+
+  </div>
+
+</div>

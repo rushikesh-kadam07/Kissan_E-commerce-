@@ -1,0 +1,200 @@
+<div class="container-fluid bg-light min-vh-100 p-4">
+
+  <!-- HERO SECTION -->
+  <div class="container">
+
+    <div class="row align-items-center bg-white shadow-lg rounded-5 overflow-hidden">
+
+      <!-- LEFT -->
+      <div class="col-lg-6 p-5">
+
+        <span class="badge bg-success px-4 py-2 rounded-pill fs-6 mb-3">
+          🌾 Kisan Link Dashboard
+        </span>
+
+        <h1 class="fw-bold display-4">
+          Welcome Back,
+          <span class="text-success">
+             {{ (customer?.name || '').split(' ')[0] }}
+          </span>
+        </h1>
+
+        <p class="text-muted fs-5 mt-3">
+          Smart farming products, quick orders and modern agriculture solutions in one place.
+        </p>
+
+        <div class="mt-4 d-flex gap-3 flex-wrap">
+
+          <a routerLink="/customer/products"
+             class="btn btn-success btn-lg rounded-pill px-4 shadow">
+
+            🛒 Shop Products
+
+          </a>
+
+          <a routerLink="/customer/myOrder"
+             class="btn btn-dark btn-lg rounded-pill px-4 shadow">
+
+            📦 My Orders
+
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="col-lg-6 p-0">
+
+        <img src="assets/images/farmbanner.jpg"
+             class="img-fluid w-100"
+             style="height:500px; object-fit:cover;">
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- DASHBOARD CARDS -->
+  <div class="container mt-5">
+
+    <div class="row g-4">
+
+      <!-- CARD 1 -->
+      <div class="col-lg-4 col-md-6">
+
+        <div class="card border-0 shadow-lg rounded-5 overflow-hidden h-100">
+
+          <img src="assets/images/products.jpg"
+               class="card-img-top"
+               style="height:240px; object-fit:cover;">
+
+          <div class="card-body text-center p-4">
+
+            <div class="display-5 mb-3">
+              🌱
+            </div>
+
+            <h3 class="fw-bold">
+              Farming Products
+            </h3>
+
+            <p class="text-muted">
+              Explore seeds, fertilizers, tools and smart farming items.
+            </p>
+
+            <a routerLink="/customer/products"
+               class="btn btn-success rounded-pill px-4">
+
+              Explore
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="col-lg-4 col-md-6">
+
+        <div class="card border-0 shadow-lg rounded-5 overflow-hidden h-100">
+
+          <img src="assets/images/cart.jpg"
+               class="card-img-top"
+               style="height:240px; object-fit:cover;">
+
+          <div class="card-body text-center p-4">
+
+            <div class="display-5 mb-3">
+              🛒
+            </div>
+
+            <h3 class="fw-bold">
+              My Cart
+            </h3>
+
+            <p class="text-muted">
+              Check selected products and continue shopping easily.
+            </p>
+
+            <a routerLink="/customer/cart"
+               class="btn btn-warning rounded-pill px-4">
+
+              View Cart
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="col-lg-4 col-md-6">
+
+        <div class="card border-0 shadow-lg rounded-5 overflow-hidden h-100">
+
+          <img src="assets/images/orders.jpg"
+               class="card-img-top"
+               style="height:240px; object-fit:cover;">
+
+          <div class="card-body text-center p-4">
+
+            <div class="display-5 mb-3">
+              🚚
+            </div>
+
+            <h3 class="fw-bold">
+              Order Tracking
+            </h3>
+
+            <p class="text-muted">
+              View your order history and delivery status quickly.
+            </p>
+
+            <a routerLink="/customer/myOrder"
+               class="btn btn-primary rounded-pill px-4">
+
+              Track Orders
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- OFFER SECTION -->
+  <div class="container mt-5 mb-5">
+
+    <div class="bg-success text-white rounded-5 shadow-lg p-5 text-center">
+
+      <h2 class="fw-bold">
+        🎉 Special Farming Offers
+      </h2>
+
+      <p class="fs-5 mt-3">
+        Get discounts on seeds, irrigation systems and farming equipment.
+      </p>
+
+      <a routerLink="/customer/products"
+         class="btn btn-light btn-lg rounded-pill px-5 mt-3 fw-bold">
+
+        Shop Now
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>

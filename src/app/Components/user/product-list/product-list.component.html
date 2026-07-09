@@ -1,0 +1,149 @@
+<div class="container-fluid mt-3 py-3 min-vh-100 main-bg">
+  <div class="row g-3">
+
+    <div class="col-md-3">
+      <div class="bg-white rounded-4 shadow-sm p-3">
+
+        <h5 class="text-center fw-bold mb-3">Categories</h5>
+
+        <div class="overflow-auto category-scroll">
+
+          <div *ngFor="let c of categoriesList"
+               class="card mb-3 border-0 rounded-4 hover-card"
+               [ngClass]="{'border border-primary': selectedCategory?.id === c.id}"
+               (click)="selectCategory(c)"
+               style="cursor:pointer;">
+
+            <img [src]="c.imageurl"
+                 class="card-img-top rounded-top-4 category-img"
+                 [alt]="c.name">
+
+            <div class="card-body text-center p-2">
+              <small class="fw-semibold">{{c.name}}</small>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="p-3 rounded-4 product-bg">
+
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+          <div>
+            <h4 class="fw-bold mb-1">
+              <ng-container *ngIf="searchKeyword; else productTitle">
+                Search Results for "{{ searchKeyword }}"
+              </ng-container>
+              <ng-template #productTitle>
+                {{ selectedCategory ? selectedCategory.name + ' Products' : 'All Products' }}
+              </ng-template>
+            </h4>
+            <small class="text-muted">Search by product name, category, or keywords</small>
+          </div>
+
+          <span *ngIf="!isLoading" class="badge bg-success rounded-pill px-3 py-2">
+            {{ productList.length }} Products
+          </span>
+        </div>
+
+        <div class="search-panel mb-4">
+          <div class="input-group">
+            <span class="input-group-text bg-white text-success">
+              <span aria-hidden="true">&#128269;</span>
+            </span>
+            <input type="text"
+                   class="form-control"
+                   name="productSearch"
+                   [(ngModel)]="searchKeyword"
+                   (ngModelChange)="onSearchChange($event)"
+                   (keyup.enter)="searchNow()"
+                   placeholder="Search products, categories, keywords...">
+            <button *ngIf="searchKeyword"
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    (click)="clearSearch()">
+              Clear
+            </button>
+            <button class="btn btn-success"
+                    type="button"
+                    (click)="searchNow()"
+                    [disabled]="isLoading">
+              <span *ngIf="!isLoading">Search</span>
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
+
+        <div *ngIf="isLoading" class="text-center py-5">
+          <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="text-muted mt-3 mb-0">Loading products...</p>
+        </div>
+
+        <div *ngIf="!isLoading && productList.length > 0" class="row g-3">
+
+          <div *ngFor="let p of productList"
+               class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+
+            <div class="card h-100 border-0 rounded-4 shadow-sm hover-card">
+
+              <img [src]="p.images.length ? p.images[0].imageUrl : 'assets/images/farmer.jpg'"
+                   class="card-img-top rounded-top-4 product-img"
+                   [alt]="p.product_name">
+
+              <div class="card-body d-flex flex-column">
+
+                <h6 class="fw-semibold mb-1">
+                  {{p.product_name}}
+                </h6>
+
+                <p class="text-success fw-bold mb-2">
+                  {{ p.price | currency:'INR' }}
+                </p>
+
+                <div class="small text-muted mb-2"
+                     *ngFor="let s of p.specifications">
+                  {{ s.name }} : {{ s.value }}
+                </div>
+
+                <p class="small mb-3 text-muted">
+                  Farmer : {{p.farmer.name}}
+                </p>
+
+                <a class="btn btn-primary btn-sm rounded-pill mt-auto"
+                   [routerLink]="['/product', p.id]">
+                   View Details
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div *ngIf="!isLoading && productList.length === 0"
+             class="text-center mt-5">
+
+          <div class="bg-white rounded-4 shadow-sm p-5 mx-auto empty-state">
+            <h5 class="text-muted fw-bold">No Products Found</h5>
+            <p class="text-muted small mb-0">Try another keyword or browse a different category.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,92 @@
+import { CommonModule, JsonPipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PaymentService } from '../../../Services/payment.service';
+
+@Component({
+  selector: 'app-payment-success',
+  standalone: true,
+  imports: [CommonModule, JsonPipe],
+  templateUrl: './payment-success.component.html',
+  styleUrl: './payment-success.component.css'
+})
+export class PaymentSuccessComponent implements OnInit {
+
+  order: any;
+  loading = true;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private paymentService: PaymentService
+  ) {}
+
+  ngOnInit(): void {
+
+    const sessionId = this.route.snapshot.queryParamMap.get('session_id');
+
+    // STRIPE PAYMENT FLOW
+    if (sessionId) {
+
+      this.paymentService.confirmPayment(sessionId).subscribe({
+        next: (res) => {
+          this.order = res;
+          console.log(res);
+          this.loading = false;
+        },
+
+        error: (err) => {
+          console.error(err);
+          this.router.navigate(['/customer/cart']);
+        }
+      });
+
+    }
+
+    // COD FLOW
+    else {
+
+      const data = localStorage.getItem('paymentData');
+
+      if (!data) {
+        alert('No payment data found');
+        this.router.navigate(['/customer/cart']);
+        return;
+      }
+
+      const paymentRes = JSON.parse(data);
+
+      // extract order
+      this.order = paymentRes.order;
+
+      this.loading = false;
+
+      // clear local storage
+      localStorage.removeItem('paymentData');
+    }
+  }
+
+  getTotal(): number {
+    return this.order?.items?.reduce(
+      (sum: number, i: any) => sum + i.total,
+      0
+    ) || 0;
+  }
+
+  getGST(): number {
+    return this.getTotal() * 0.18;
+  }
+
+  getDiscount(): number {
+    return this.getTotal() * 0.05;
+  }
+
+  getNet(): number {
+    return this.getTotal() + this.getGST() - this.getDiscount();
+  }
+
+  printInvoice() {
+    window.print();
+  }
+
+}

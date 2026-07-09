@@ -1,0 +1,139 @@
+/* =========================
+   GLOBAL RESET + BODY
+========================= */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f7f6;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+.hero-section {
+  min-height: 100vh;
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.65),
+      rgba(0, 0, 0, 0.65)
+    ),
+    url("/assets/images/farm-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding: 60px 0;
+}
+
+/* HERO ROW ANIMATION */
+.hero-row {
+  animation: fadeUp 1s ease-in-out;
+}
+
+/* HERO IMAGE */
+.hero-image {
+  max-height: 500px;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.hero-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* BADGE */
+.hero-section .badge {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* BUTTONS */
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+/* =========================
+   STATS BOX
+========================= */
+.stats-box {
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+}
+
+.stats-box:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* =========================
+   FEATURES SECTION
+========================= */
+.feature-card {
+  transition: all 0.4s ease;
+  background: #ffffff;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* ICON CIRCLE */
+.icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FEATURE IMAGE ICON */
+.feature-img {
+  width: 45px;
+  height: 45px;
+}
+
+/* =========================
+   HEADINGS
+========================= */
+h1, h2, h3 {
+  letter-spacing: 0.5px;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+@media (max-width: 768px) {
+  .hero-section {
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .hero-image {
+    max-height: 300px;
+  }
+
+  .display-2 {
+    font-size: 2.2rem;
+  }
+}
