@@ -1,0 +1,96 @@
+<div class="container py-4">
+  <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-4">
+    <div>
+      <h2 class="fw-bold text-success mb-1">My Product Orders</h2>
+      <p class="text-muted mb-0">Orders that include products listed by you.</p>
+    </div>
+
+    <span class="badge bg-success px-3 py-2 align-self-start align-self-lg-center">
+      {{ filteredOrders.length }} of {{ orders.length }} Orders
+    </span>
+  </div>
+
+  <div class="row g-3 align-items-center mb-4">
+    <div class="col-lg-6">
+      <input
+        type="search"
+        class="form-control"
+        placeholder="Search by order, customer, product, or status"
+        [(ngModel)]="searchText"
+        (ngModelChange)="applySearch()"
+      />
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="text-center py-5">
+    <div class="spinner-border text-success" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="text-muted mt-3 mb-0">Loading your product orders...</p>
+  </div>
+
+  <div *ngIf="!isLoading && filteredOrders.length === 0" class="border rounded-3 p-5 text-center bg-light">
+    <h5 class="fw-semibold mb-2">No orders found</h5>
+    <p class="text-muted mb-0">
+      {{ orders.length === 0 ? 'Your products do not have orders yet.' : 'No orders match your search.' }}
+    </p>
+  </div>
+
+  <div *ngIf="!isLoading && filteredOrders.length > 0" class="table-responsive shadow-sm rounded-3 border">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-success">
+        <tr>
+          <th>Order</th>
+          <th>Customer</th>
+          <th>Product</th>
+          <th class="text-center">Qty</th>
+          <th class="text-end">Total</th>
+          <th>Payment</th>
+          <th>Order Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of filteredOrders">
+          <td class="fw-semibold">#{{ order.orderId }}</td>
+          <td>
+            <div class="fw-semibold">{{ order.customerName || 'Customer' }}</div>
+            <div class="small text-muted">{{ order.customerEmail }}</div>
+            <div class="small text-muted">{{ order.customerContact }}</div>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-3">
+              <img
+                *ngIf="order.productImageUrl"
+                [src]="order.productImageUrl"
+                [alt]="order.productName"
+                class="rounded"
+                width="48"
+                height="48"
+              />
+              <div>
+                <div class="fw-semibold">{{ order.productName }}</div>
+                <div class="small text-muted">Product #{{ order.productId }}</div>
+              </div>
+            </div>
+          </td>
+          <td class="text-center">{{ order.quantity }}</td>
+          <td class="text-end fw-semibold">
+            {{ order.totalPrice | currency:'INR':'symbol':'1.2-2' }}
+          </td>
+          <td>
+            <span class="badge" [ngClass]="getStatusBadge(order.paymentStatus)">
+              {{ order.paymentStatus || 'PENDING' }}
+            </span>
+          </td>
+          <td>
+            <span class="badge" [ngClass]="getStatusBadge(order.orderStatus)">
+              {{ order.orderStatus || 'IN_PROCESS' }}
+            </span>
+          </td>
+          <td>{{ order.orderDate | date:'mediumDate' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

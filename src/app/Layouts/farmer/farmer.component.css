@@ -1,0 +1,38 @@
+/* NAV LINKS */
+
+.nav-link{
+  position: relative;
+  transition: 0.3s;
+  padding-bottom: 8px;
+}
+
+/* YELLOW BOTTOM LINE */
+
+.nav-link::after{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 3px;
+  background: #ffc107;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+/* HOVER EFFECT */
+
+.nav-link:hover::after{
+  width: 100%;
+}
+
+/* ACTIVE LINK */
+
+.active::after{
+  width: 100%;
+}
+
+.active{
+  color: #ffc107 !important;
+  font-weight: 700;
+}

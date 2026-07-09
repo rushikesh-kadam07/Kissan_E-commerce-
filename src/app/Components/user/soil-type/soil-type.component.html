@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Soil Types & Recommended Crops</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+
+    body{
+      background:#f4fff4;
+      font-family:Arial, sans-serif;
+    }
+
+    .hero{
+      background:
+      linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+      url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1600');
+      background-size:cover;
+      background-position:center;
+      min-height:60vh;
+      display:flex;
+      align-items:center;
+      color:white;
+    }
+
+    .soil-card{
+      border:none;
+      border-radius:25px;
+      overflow:hidden;
+      transition:0.4s;
+    }
+
+    .soil-card:hover{
+      transform:translateY(-10px);
+    }
+
+    .soil-img{
+      height:260px;
+      object-fit:cover;
+    }
+
+    .info-box{
+      background:#ffffff;
+      border-radius:20px;
+      padding:20px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .footer{
+      background:#198754;
+      color:white;
+    }
+
+    .crop-badge{
+      margin:5px;
+      padding:10px 15px;
+      font-size:14px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero text-center">
+
+  <div class="container">
+
+    <h1 class="display-3 fw-bold">
+      🌱 Soil Types & Farming Crops
+    </h1>
+
+    <p class="lead mt-4">
+      Learn soil properties, water holding capacity,
+      and suitable crops for better farming productivity.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- SOIL SECTION -->
+<section class="container py-5">
+
+  <div class="text-center mb-5">
+
+    <h2 class="fw-bold text-success">
+      🌾 Major Soil Types
+    </h2>
+
+    <p class="text-muted fs-5">
+      Best crops according to soil condition
+    </p>
+
+  </div>
+
+  <div class="row g-4">
+
+    <!-- BLACK SOIL -->
+    <div class="col-lg-4">
+
+      <div class="card soil-card shadow-lg h-100">
+
+        <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1200"
+             class="card-img-top soil-img"
+             alt="Black Soil">
+
+        <div class="card-body">
+
+          <h3 class="fw-bold text-dark">
+            🖤 Black Soil
+          </h3>
+
+          <p class="text-muted">
+            Black soil is rich in clay and minerals.
+            It retains moisture for a long time and is ideal for cotton farming.
+          </p>
+
+          <div class="info-box mt-3">
+
+            <h5 class="text-success">
+              💧 Water Holding Capacity
+            </h5>
+
+            <div class="progress mb-3" style="height:25px;">
+              <div class="progress-bar bg-success"
+                   style="width:90%;">
+                   High - 90%
+              </div>
+            </div>
+
+            <h5 class="text-success">
+              🌱 Recommended Crops
+            </h5>
+
+            <span class="badge bg-dark crop-badge">Cotton</span>
+            <span class="badge bg-dark crop-badge">Soybean</span>
+            <span class="badge bg-dark crop-badge">Wheat</span>
+            <span class="badge bg-dark crop-badge">Sunflower</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RED SOIL -->
+    <div class="col-lg-4">
+
+      <div class="card soil-card shadow-lg h-100">
+
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200"
+             class="card-img-top soil-img"
+             alt="Red Soil">
+
+        <div class="card-body">
+
+          <h3 class="fw-bold text-danger">
+            ❤️ Red Soil
+          </h3>
+
+          <p class="text-muted">
+            Red soil contains iron and supports many crops.
+            It has moderate water retention and good drainage.
+          </p>
+
+          <div class="info-box mt-3">
+
+            <h5 class="text-success">
+              💧 Water Holding Capacity
+            </h5>
+
+            <div class="progress mb-3" style="height:25px;">
+              <div class="progress-bar bg-warning text-dark"
+                   style="width:60%;">
+                   Medium - 60%
+              </div>
+            </div>
+
+            <h5 class="text-success">
+              🌱 Recommended Crops
+            </h5>
+
+            <span class="badge bg-danger crop-badge">Groundnut</span>
+            <span class="badge bg-danger crop-badge">Millets</span>
+            <span class="badge bg-danger crop-badge">Potato</span>
+            <span class="badge bg-danger crop-badge">Pulses</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- SANDY SOIL -->
+    <div class="col-lg-4">
+
+      <div class="card soil-card shadow-lg h-100">
+
+        <img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b6?q=80&w=1200"
+             class="card-img-top soil-img"
+             alt="Sandy Soil">
+
+        <div class="card-body">
+
+          <h3 class="fw-bold text-warning">
+            🟤 Sandy Soil
+          </h3>
+
+          <p class="text-muted">
+            Sandy soil has larger particles and drains water quickly.
+            Suitable for crops needing less water retention.
+          </p>
+
+          <div class="info-box mt-3">
+
+            <h5 class="text-success">
+              💧 Water Holding Capacity
+            </h5>
+
+            <div class="progress mb-3" style="height:25px;">
+              <div class="progress-bar bg-danger"
+                   style="width:35%;">
+                   Low - 35%
+              </div>
+            </div>
+
+            <h5 class="text-success">
+              🌱 Recommended Crops
+            </h5>
+
+            <span class="badge bg-warning text-dark crop-badge">
+              Watermelon
+            </span>
+
+            <span class="badge bg-warning text-dark crop-badge">
+              Peanuts
+            </span>
+
+            <span class="badge bg-warning text-dark crop-badge">
+              Carrot
+            </span>
+
+            <span class="badge bg-warning text-dark crop-badge">
+              Cucumber
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- EXTRA INFORMATION -->
+<section class="container py-5">
+
+  <div class="row g-4">
+
+    <!-- TIPS -->
+    <div class="col-lg-6">
+
+      <div class="info-box h-100">
+
+        <h2 class="fw-bold text-success">
+          🌿 Smart Farming Tips
+        </h2>
+
+        <ul class="fs-5 mt-4">
+
+          <li>✔️ Test soil before crop planting.</li>
+          <li>✔️ Use organic fertilizers.</li>
+          <li>✔️ Maintain irrigation properly.</li>
+          <li>✔️ Use crop rotation methods.</li>
+          <li>✔️ Protect soil moisture using mulching.</li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="col-lg-6">
+
+      <div class="info-box h-100">
+
+        <h2 class="fw-bold text-success">
+          💧 Soil Water Comparison
+        </h2>
+
+        <table class="table table-bordered table-hover mt-4">
+
+          <thead class="table-success">
+
+            <tr>
+              <th>Soil Type</th>
+              <th>Water Holding</th>
+              <th>Best Crop</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>Black Soil</td>
+              <td>High</td>
+              <td>Cotton</td>
+            </tr>
+
+            <tr>
+              <td>Red Soil</td>
+              <td>Medium</td>
+              <td>Groundnut</td>
+            </tr>
+
+            <tr>
+              <td>Sandy Soil</td>
+              <td>Low</td>
+              <td>Watermelon</td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="footer py-4 text-center">
+
+  <div class="container">
+
+    <h4>
+      🌾 Smart Farming Information Portal
+    </h4>
+
+    <p class="mb-0">
+      Helping farmers select the right crops based on soil type
+    </p>
+
+  </div>
+
+</footer>
+
+</body>
+</html>

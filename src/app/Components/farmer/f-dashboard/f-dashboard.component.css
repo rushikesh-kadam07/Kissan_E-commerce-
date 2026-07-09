@@ -1,0 +1,19 @@
+/* DASHBOARD CARD EFFECT */
+
+.dashboard-card{
+  transition:0.3s;
+}
+
+.dashboard-card:hover{
+  transform:translateY(-5px);
+}
+
+/* BUTTON EFFECT */
+
+.btn{
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:scale(1.02);
+}

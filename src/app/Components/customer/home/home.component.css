@@ -1,0 +1,145 @@
+.hero-section {
+  height: 350px;
+  background: linear-gradient(135deg, #16a34a, #4ade80);
+}
+
+.banner-img {
+  height: 250px;
+  object-fit: cover;
+}
+
+.offer-strip {
+  background: linear-gradient(90deg, #f59e0b, #f97316);
+}
+
+.category-card,
+.product-card,
+.action-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.category-card:hover,
+.product-card:hover,
+.action-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.product-img {
+  height: 150px;
+  object-fit: cover;
+}
+
+.hero-section{
+  height: 80vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+    url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1600&auto=format&fit=crop');
+
+  background-size: cover;
+  background-position: center;
+}
+
+.banner-img{
+  height: 420px;
+  object-fit: cover;
+}
+
+.category-card{
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.category-card:hover{
+  transform: translateY(-8px);
+}
+
+.category-img{
+  height: 140px;
+  object-fit: cover;
+}
+
+.offer-strip{
+  background: linear-gradient(90deg,#198754,#157347);
+  font-size: 18px;
+}
+
+.product-card{
+  transition: 0.3s;
+}
+
+.product-card:hover{
+  transform: translateY(-8px);
+}
+
+.product-img{
+  height: 220px;
+  object-fit: cover;
+}
+
+.action-card{
+  transition: 0.3s;
+}
+
+.action-card:hover{
+  transform: translateY(-8px);
+}
+
+body{
+  background: #f5fff7;
+}
+
+/* .hero-section{
+  height: 85vh;
+  background:
+  linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),
+  url('assets/images/hero.jpg');
+
+  background-size: cover;
+  background-position: center;
+} */
+
+.banner-img{
+  height: 450px;
+  object-fit: cover;
+}
+
+.category-img{
+  height: 220px;
+  object-fit: cover;
+}
+
+.product-img{
+  height: 240px;
+  object-fit: cover;
+}
+
+.category-card{
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.category-card:hover{
+  transform: translateY(-10px);
+}
+
+.product-card{
+  transition: 0.4s;
+}
+
+.product-card:hover{
+  transform: translateY(-10px);
+}
+
+.card{
+  transition: 0.4s;
+}
+
+.card:hover{
+  transform: translateY(-8px);
+}
+
+body{
+  background: #f5fff7;
+}

@@ -1,0 +1,234 @@
+/* TABLE */
+.report-table{
+
+  background:#ffffff;
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+  border:1px solid #cfe0d4;
+}
+
+/* TABLE HEADER */
+.report-table thead{
+
+  background:#4f6f57;
+}
+
+.report-table th{
+
+  padding:15px;
+
+  font-weight:700;
+
+  color:white;
+
+  border:1px solid #6f8f77;
+
+  background:#4f6f57;
+}
+
+/* TABLE DATA */
+.report-table td{
+
+  padding:14px;
+
+  vertical-align:middle;
+
+  border:1px solid #dfe7e2;
+
+  background:#f8fbf8;
+
+  color:#2d3436;
+}
+
+/* ALTERNATE ROW COLOR */
+.report-table tbody tr:nth-child(even) td{
+
+  background:#eef5f0;
+}
+
+/* ROW HOVER */
+.report-table tbody tr:hover td{
+
+  background:#dcefe2;
+
+  transition:0.3s;
+}
+
+/* REMOVE DOUBLE BORDER */
+.table>:not(caption)>*>*{
+
+  border-bottom-width:1px;
+}/* PAGE BACKGROUND */
+.report-bg{
+
+  min-height:100vh;
+
+  background:
+  linear-gradient(135deg,#dff3e3,#c7e8cf);
+
+  padding:20px;
+}
+
+/* CARD */
+.report-card{
+
+  background:#f7fcf8;
+
+  border-radius:22px;
+
+  padding:28px;
+
+  border:1px solid #cfe3d4;
+
+  box-shadow:0 5px 15px rgba(0,0,0,0.06);
+}
+
+/* TABLE */
+.report-table{
+
+  background:#ffffff;
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+  border:1px solid #b9d7c0;
+}
+
+/* TABLE HEADER */
+.report-table thead{
+
+  background:#2f5d3a;
+}
+
+.report-table th{
+
+  padding:15px;
+
+  font-weight:700;
+
+  color:white;
+
+  border:1px solid #5f8a68;
+
+  background:#2f5d3a;
+}
+
+/* TABLE DATA */
+.report-table td{
+
+  padding:14px;
+
+  vertical-align:middle;
+
+  border:1px solid #dce9df;
+
+  background:#f5fbf6;
+
+  color:#2d3436;
+}
+
+/* ALTERNATE ROW */
+.report-table tbody tr:nth-child(even) td{
+
+  background:#e8f5eb;
+}
+
+/* ROW HOVER */
+.report-table tbody tr:hover td{
+
+  background:#d3ebd8;
+
+  transition:0.3s;
+}
+
+/* FILTER BOX */
+.filter-box{
+
+  background:#edf7ef;
+
+  border-radius:18px;
+
+  padding:20px;
+
+  border:1px solid #cfe3d4;
+}
+
+/* INPUT */
+.custom-input{
+
+  border-radius:12px;
+
+  border:1px solid #bfd6c5;
+
+  padding:11px;
+
+  background:white;
+}
+
+.custom-input:focus{
+
+  border-color:#198754;
+
+  box-shadow:0 0 0 0.15rem rgba(25,135,84,0.15);
+}
+
+/* BUTTONS */
+.export-btn{
+
+  border-radius:12px;
+
+  padding:10px 18px;
+
+  font-weight:600;
+
+  transition:0.3s;
+}
+
+.export-btn:hover{
+
+  transform:translateY(-2px);
+}
+
+/* PDF */
+.pdf-btn{
+
+  background:#dc3545;
+
+  color:white;
+}
+
+/* EXCEL */
+.excel-btn{
+
+  background:#198754;
+
+  color:white;
+}
+
+/* SEARCH */
+.search-btn{
+
+  border-radius:12px;
+
+  padding:11px;
+
+  font-weight:600;
+}
+
+/* NO DATA */
+.no-data-box{
+
+  background:#edf7ef;
+
+  border-radius:16px;
+
+  padding:40px;
+
+  text-align:center;
+
+  border:1px dashed #b8d4bf;
+}

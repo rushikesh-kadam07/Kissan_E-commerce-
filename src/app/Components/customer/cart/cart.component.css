@@ -1,0 +1,52 @@
+.cart-bg {
+  background: #f4f6f9;
+}
+
+.cart-card,
+.shipping-card,
+.total-card,
+.empty-cart {
+  background: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.cart-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.08) !important;
+}
+
+.product-image {
+  transition: 0.4s;
+}
+
+.cart-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+.quantity-box {
+  max-width: 160px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #198754;
+}
+
+.btn-success {
+  background: #198754;
+  border: none;
+}
+
+.btn-success:hover {
+  background: #157347;
+}
+
+.btn-warning:hover {
+  background: #ffca2c;
+}
+
+.card {
+  border-radius: 20px;
+}

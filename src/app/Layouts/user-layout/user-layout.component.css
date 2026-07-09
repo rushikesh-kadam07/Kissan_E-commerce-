@@ -1,0 +1,54 @@
+/* NAVBAR */
+.navbar{
+    z-index: 1090;
+}
+
+/* NAV LINKS */
+.nav-link{
+    position: relative;
+    transition: 0.3s;
+}
+
+/* YELLOW LINE EFFECT */
+.nav-link::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0%;
+    height: 3px;
+    background-color: #ffc107;
+    transition: 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+/* HOVER EFFECT */
+.nav-link:hover{
+    color: #ffc107 !important;
+}
+
+.nav-link:hover::after{
+    width: 100%;
+}
+
+/* DROPDOWN FIX */
+.dropdown-menu{
+    z-index: 1080 !important;
+}
+
+/* IMAGE OVERLAP FIX */
+img,
+.carousel,
+.card,
+.banner,
+.hero-section{
+    position: relative;
+    z-index: 1;
+}
+
+/* DROPDOWN ITEM */
+.dropdown-item:hover{
+    background-color: #198754;
+    color: white;
+    border-radius: 10px;
+}

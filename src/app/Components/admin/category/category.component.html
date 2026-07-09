@@ -1,0 +1,83 @@
+<div class="category-container">
+
+  <h2 class="title">✨ Manage Categories</h2>
+
+  <div class="card form-card">
+
+    <h4 class="form-title">{{ isEdit ? '✏️ Edit Category' : '➕ Add New Category' }}</h4>
+
+    <div *ngIf="success" class="alert alert-success custom-alert">{{ success }}</div>
+    <div *ngIf="error" class="alert alert-danger custom-alert">{{ error }}</div>
+
+    <div class="row mt-3">
+
+      <div class="col-md-6 mb-3">
+        <label>Category Name</label>
+        <input class="form-control custom-input" [(ngModel)]="newCategory.name" required>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label>Upload Image</label>
+        <input type="file" class="form-control custom-input" (change)="onImageSelected($event)">
+      </div>
+
+      <div class="col-md-6 mb-3 preview-box" *ngIf="imagePreview">
+        <label>Preview</label>
+        <img [src]="imagePreview" class="preview-img">
+      </div>
+
+      <div class="col-12 mt-3 d-flex gap-2">
+
+        <button class="btn btn-gradient"
+                *ngIf="!isEdit"
+                (click)="saveCategory()"
+                [disabled]="!newCategory.name">
+          Add Category
+        </button>
+
+        <button class="btn btn-update"
+                *ngIf="isEdit"
+                (click)="updateCategory()">
+          Update
+        </button>
+
+        <button class="btn btn-clear" (click)="resetForm()">Clear</button>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="table-card">
+    <table class="table custom-table">
+
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let c of categories">
+          <td>{{ c.id }}</td>
+
+          <td>
+            <img [src]="c.imageurl" class="table-img">
+          </td>
+
+          <td>{{ c.name }}</td>
+
+          <td>
+            <button class="btn btn-sm btn-edit" (click)="editCategory(c)">Edit</button>
+            <button class="btn btn-sm btn-delete ms-1" (click)="deleteCategory(c.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+</div>

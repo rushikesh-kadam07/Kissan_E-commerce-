@@ -1,0 +1,295 @@
+<div class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+
+        <h2 class="fw-bold text-success mb-0">
+            📦 My Orders
+        </h2>
+
+        <span class="badge bg-warning text-dark px-4 py-2 rounded-pill fs-6 shadow-sm">
+            {{ orders.length }} Orders
+        </span>
+
+    </div>
+
+    <div *ngIf="orders.length === 0"
+         class="alert alert-info shadow-lg rounded-4 text-center border-0 py-4">
+
+        No Orders Found
+
+    </div>
+
+    <div *ngFor="let order of orders"
+         class="card border-success border-2 shadow-lg rounded-4 mb-4 overflow-hidden">
+
+        <div class="card-body p-4">
+
+            <!-- TOP INFO -->
+            <div class="row g-3 mb-4">
+
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="bg-light border border-success-subtle rounded-4 p-3 h-100 shadow-sm">
+
+                        <small class="text-muted d-block mb-1">
+                            Order ID
+                        </small>
+
+                        <span class="fw-bold fs-6">
+                            #{{ order.id }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="bg-light border border-success-subtle rounded-4 p-3 h-100 shadow-sm">
+
+                        <small class="text-muted d-block mb-1">
+                            Order Date
+                        </small>
+
+                        <span class="fw-semibold">
+                            {{ order.orderDate | date:'medium' }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="bg-light border border-success-subtle rounded-4 p-3 h-100 shadow-sm">
+
+                        <small class="text-muted d-block mb-2">
+                            Order Status
+                        </small>
+
+                        <span class="badge px-3 py-2"
+                              [ngClass]="{
+                              'bg-warning text-dark': order.status === 'IN_PROCESS',
+                              'bg-primary': order.status === 'CONFIRMED',
+                              'bg-info text-dark': order.status === 'DISPATCH',
+                              'bg-success': order.status === 'DELIVERED',
+                              'bg-danger': order.status === 'REJECT' || order.status === 'CANCELLED'
+                              }">
+
+                            {{ order.status }}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="bg-light border border-success-subtle rounded-4 p-3 h-100 shadow-sm">
+
+                        <small class="text-muted d-block mb-2">
+                            Payment Status
+                        </small>
+
+                        <span class="badge px-3 py-2"
+                              [ngClass]="{
+                              'bg-success': order.payment?.status === 'SUCCESS',
+                              'bg-warning text-dark': order.payment?.status === 'PENDING',
+                              'bg-danger': order.payment?.status === 'FAILED'
+                              }">
+
+                            <i class="bi me-1"
+                               [ngClass]="{
+                               'bi-check-circle': order.payment?.status === 'SUCCESS',
+                               'bi-hourglass': order.payment?.status === 'PENDING',
+                               'bi-x-circle': order.payment?.status === 'FAILED'
+                               }"></i>
+
+                            {{ order.payment?.status || 'NO PAYMENT' }}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- TABLE -->
+            <div class="table-responsive rounded-4 border border-success shadow-sm">
+
+                <table class="table align-middle table-hover mb-0">
+
+                    <thead class="table-success">
+
+                        <tr>
+                            <th class="py-3">Image</th>
+                            <th class="py-3">Product</th>
+                            <th class="py-3">Qty</th>
+                            <th class="py-3">Price</th>
+                            <th class="py-3">Total</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let item of order.items">
+
+                            <td>
+
+                                <img [src]="item.imageUrl"
+                                     class="rounded-4 border border-success shadow-sm"
+                                     style="width:75px;height:75px;object-fit:cover;">
+
+                            </td>
+
+                            <td class="fw-semibold">
+                                {{ item.productName }}
+                            </td>
+
+                            <td>
+                                {{ item.quantity }}
+                            </td>
+
+                            <td class="text-success fw-bold">
+                                ₹{{ item.price }}
+                            </td>
+
+                            <td class="fw-bold">
+                                ₹{{ item.total }}
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- PAYMENT + ADDRESS -->
+            <div class="row mt-4 g-4">
+
+                <div class="col-lg-6">
+
+                    <div class="bg-light border border-success-subtle rounded-4 p-4 h-100 shadow-sm">
+
+                        <h5 class="fw-bold text-success mb-4">
+                            💳 Payment Summary
+                        </h5>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Subtotal</span>
+
+                            <span class="fw-semibold">
+                                {{ order.totalAmount | currency:'INR' }}
+                            </span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+
+                            <span>
+                                GST ({{ order.payment?.gstPercent || 0 }}%)
+                            </span>
+
+                            <span class="fw-semibold">
+                                {{ order.payment?.gstAmount || 0 | currency:'INR' }}
+                            </span>
+
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+
+                            <span>
+                                Discount ({{ order.payment?.discountPercent || 0 }}%)
+                            </span>
+
+                            <span class="text-danger fw-semibold">
+                                -{{ order.payment?.discountAmount || 0 | currency:'INR' }}
+                            </span>
+
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <span class="fw-bold fs-5">
+                                Final Amount
+                            </span>
+
+                            <span class="fw-bold text-success fs-4">
+                                {{ (order.payment?.netAmount || order.totalAmount) | currency:'INR' }}
+                            </span>
+
+                        </div>
+
+                        <div class="mt-3">
+
+                            <span class="badge bg-dark px-3 py-2 rounded-pill">
+                                {{ order.payment?.paymentMethod }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6">
+
+                    <div class="bg-light border border-success-subtle rounded-4 p-4 h-100 shadow-sm">
+
+                        <h5 class="fw-bold text-success mb-4">
+                            🚚 Delivery Address
+                        </h5>
+
+                        <p class="fw-semibold mb-2">
+                            {{ order.shipping?.name }}
+                        </p>
+
+                        <p class="text-muted mb-2">
+                            {{ order.shipping?.address }}
+                        </p>
+
+                        <p class="text-muted mb-2">
+                            {{ order.shipping?.city }} - {{ order.shipping?.pinCode }}
+                        </p>
+
+                        <p class="mb-0">
+                            📞 {{ order.shipping?.contact }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- BUTTON -->
+            <div class="d-flex flex-wrap align-items-center gap-3 mt-4">
+
+                <button class="btn btn-danger rounded-pill px-4 fw-semibold shadow-sm"
+                        [disabled]="order.status !== 'IN_PROCESS' && order.status != 'CONFIRMED'"
+                        (click)="cancelOrder(order.id)">
+
+                    Cancel Order
+
+                </button>
+
+                <span *ngIf="order.status !== 'IN_PROCESS'"
+                      class="text-muted small">
+
+                    Cannot cancel after dispatch
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
