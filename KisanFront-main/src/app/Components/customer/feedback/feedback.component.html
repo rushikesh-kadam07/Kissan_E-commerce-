@@ -1,0 +1,212 @@
+<div class="container py-5">
+
+  <div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+      <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+
+        <div class="bg-success text-white text-center p-4">
+
+          <h2 class="fw-bold mb-2">
+            📝 Share Your Feedback
+          </h2>
+
+          <p class="mb-0">
+            Help us improve your shopping experience
+          </p>
+
+        </div>
+
+        <div *ngIf="submitted"
+             class="alert alert-success rounded-0 text-center mb-0 fw-semibold">
+
+          ✅ Thank you for your valuable feedback!
+
+        </div>
+
+        <div class="card-body p-4 p-lg-5">
+
+          <form [formGroup]="feedbackForm"
+                (ngSubmit)="submit()">
+
+            <div class="row g-4">
+
+              <div class="col-md-6">
+
+                <label class="form-label fw-semibold">
+                  Full Name
+                </label>
+
+                <input type="text"
+                       class="form-control form-control-lg rounded-3"
+                       formControlName="name"
+                       placeholder="Enter your name">
+
+              </div>
+
+              <div class="col-md-6">
+
+                <label class="form-label fw-semibold">
+                  Email Address
+                </label>
+
+                <input type="email"
+                       class="form-control form-control-lg rounded-3"
+                       formControlName="email"
+                       placeholder="Enter your email">
+
+              </div>
+
+              <div class="col-12">
+
+                <label class="form-label fw-semibold">
+                  Mobile Number
+                </label>
+
+                <input type="text"
+                       class="form-control form-control-lg rounded-3"
+                       formControlName="mobile"
+                       placeholder="Enter 10-digit number">
+
+              </div>
+
+              <!-- PRODUCT QUALITY -->
+              <div class="col-md-6">
+
+                <div class="border rounded-4 p-3 bg-light h-100">
+
+                  <label class="fw-semibold d-block mb-2">
+                    🌾 Product Quality
+                  </label>
+
+                  <div class="stars">
+
+                    <span *ngFor="let i of [1,2,3,4,5]"
+                          (click)="setRating('productQuality',i)"
+                          [class.filled]="i <= feedbackForm.value.productQuality">
+
+                      ★
+
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- PRODUCT PRICE -->
+              <div class="col-md-6">
+
+                <div class="border rounded-4 p-3 bg-light h-100">
+
+                  <label class="fw-semibold d-block mb-2">
+                    💰 Product Price
+                  </label>
+
+                  <div class="stars">
+
+                    <span *ngFor="let i of [1,2,3,4,5]"
+                          (click)="setRating('productPrice',i)"
+                          [class.filled]="i <= feedbackForm.value.productPrice">
+
+                      ★
+
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- ORDER PROCESS -->
+              <div class="col-md-6">
+
+                <div class="border rounded-4 p-3 bg-light h-100">
+
+                  <label class="fw-semibold d-block mb-2">
+                    📦 Order Process
+                  </label>
+
+                  <div class="stars">
+
+                    <span *ngFor="let i of [1,2,3,4,5]"
+                          (click)="setRating('orderProcess',i)"
+                          [class.filled]="i <= feedbackForm.value.orderProcess">
+
+                      ★
+
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- DELIVERY -->
+              <div class="col-md-6">
+
+                <div class="border rounded-4 p-3 bg-light h-100">
+
+                  <label class="fw-semibold d-block mb-2">
+                    🚚 Delivery Service
+                  </label>
+
+                  <div class="stars">
+
+                    <span *ngFor="let i of [1,2,3,4,5]"
+                          (click)="setRating('deliveryService',i)"
+                          [class.filled]="i <= feedbackForm.value.deliveryService">
+
+                      ★
+
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="col-12">
+
+                <label class="form-label fw-semibold">
+                  Suggestions
+                </label>
+
+                <textarea class="form-control rounded-4"
+                          rows="5"
+                          formControlName="suggestion"
+                          placeholder="Write your thoughts here...">
+                </textarea>
+
+              </div>
+
+              <div class="col-12 text-center">
+
+                <button type="submit"
+                        class="btn btn-warning btn-lg rounded-pill px-5 fw-bold shadow-sm"
+                        [disabled]="submitting">
+
+                  Submit Feedback
+
+                </button>
+
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,170 @@
+<div class="admin-layout bg-light min-vh-100 d-flex flex-column">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow sticky-top py-3">
+
+    <div class="container-fluid px-4">
+
+      <!-- LOGO -->
+      <a class="navbar-brand fw-bold fs-3 text-warning" href="#">
+        🛒 Admin Panel
+      </a>
+
+      <!-- TOGGLE -->
+      <button class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#adminNavbar">
+
+        <span class="navbar-toggler-icon"></span>
+
+      </button>
+
+      <!-- NAVBAR CONTENT -->
+      <div class="collapse navbar-collapse" id="adminNavbar">
+
+        <!-- NAV LINKS -->
+        <ul class="navbar-nav mx-auto gap-lg-3">
+
+          <!-- DASHBOARD -->
+          <li class="nav-item">
+            <a class="nav-link px-4 py-2 rounded-pill fw-semibold"
+               routerLink="/admin/dashboard"
+               routerLinkActive="active">
+
+              <i class="fa fa-home me-2"></i>
+              Dashboard
+
+            </a>
+          </li>
+
+         
+
+          <!-- CATEGORIES -->
+          <li class="nav-item">
+            <a class="nav-link px-4 py-2 rounded-pill fw-semibold"
+               routerLink="/admin/categories"
+               routerLinkActive="active">
+
+              <i class="fa fa-list me-2"></i>
+              Categories
+
+            </a>
+          </li>
+
+          <!-- ORDERS -->
+          <li class="nav-item">
+            <a class="nav-link px-4 py-2 rounded-pill fw-semibold"
+               routerLink="/admin/orders"
+               routerLinkActive="active">
+
+              <i class="fa fa-shopping-cart me-2"></i>
+              Orders
+
+            </a>
+          </li>
+
+         
+
+          <!-- REPORTS -->
+          <li class="nav-item dropdown">
+
+            <a class="nav-link dropdown-toggle px-4 py-2 rounded-pill fw-semibold"
+               href="#"
+               role="button"
+               data-bs-toggle="dropdown">
+
+              <i class="fa fa-chart-bar me-2"></i>
+              Reports
+
+            </a>
+
+            <!-- DROPDOWN -->
+            <ul class="dropdown-menu shadow border-0 rounded-4">
+
+              <li>
+                <a class="dropdown-item"
+                   routerLink="/admin/report/category">
+                  Category Report
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                   routerLink="/admin/report/products">
+                  Product Report
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                   routerLink="/admin/report/enquiry">
+                  Enquiry Report
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                   routerLink="/admin/report/customers">
+                  Customer Report
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                   routerLink="/admin/report/feedback">
+                  Feedback Report
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                   routerLink="/admin/report/orders">
+                  Order Report
+                </a>
+              </li>
+
+            </ul>
+
+          </li>
+
+        </ul>
+
+        <!-- LOGOUT -->
+        <button class="btn btn-warning rounded-pill px-4 fw-bold"
+                (click)="logout()">
+
+          <i class="fa fa-sign-out-alt me-2"></i>
+          Logout
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-grow-1">
+
+    <div class="container-fluid py-4">
+
+      <div class="bg-white rounded-4 shadow-sm p-4">
+
+        <router-outlet></router-outlet>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-auto">
+
+    <app-footer></app-footer>
+
+  </footer>
+
+</div>

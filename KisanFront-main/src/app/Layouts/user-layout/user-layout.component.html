@@ -1,0 +1,201 @@
+<div class="d-flex flex-column vh-100 bg-light">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow sticky-top">
+
+    <div class="container">
+
+      <!-- LOGO -->
+      <a class="navbar-brand fw-bold fs-4">
+        🌾 Kisan <span class="text-warning">Link</span>
+      </a>
+
+      <!-- TOGGLER -->
+      <button class="navbar-toggler border-0"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarContent">
+
+        <span class="navbar-toggler-icon"></span>
+
+      </button>
+
+      <!-- NAVBAR CONTENT -->
+      <div class="collapse navbar-collapse justify-content-between"
+           id="navbarContent">
+
+        <!-- MENU -->
+        <ul class="navbar-nav mx-auto align-items-lg-center gap-lg-3">
+
+          <li class="nav-item">
+            <a class="nav-link text-white fw-semibold"
+               routerLink="/">
+              🏠 Home
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-white fw-semibold"
+              routerLink="/aboutus">
+              ℹ️ About
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-white fw-semibold"
+               routerLink="/enquiry">
+              📩 Enquiry
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-white fw-semibold"
+               routerLink="/product">
+              🛒 Product
+            </a>
+          </li>
+
+          <!-- DROPDOWN -->
+          <li class="nav-item dropdown">
+
+            <a class="nav-link dropdown-toggle text-white fw-semibold"
+               href="#"
+               role="button"
+               data-bs-toggle="dropdown">
+
+              🚜 Modern Farming
+
+            </a>
+
+            <!-- Bootstrap Dropdown -->
+            <ul class="dropdown-menu shadow-lg border-0 rounded-4">
+
+              <li>
+                <a class="dropdown-item py-2"
+                   routerLink="/agri-robotices">
+                  🤖 Agriculture Robotics
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item py-2"
+                   routerLink="/aerohonics">
+                  🌫️ Aeroponics
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item py-2"
+                   routerLink="/greenhouse">
+                  🌱 Greenhouse
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item py-2"
+                   routerLink="/precision">
+                  📡 Precision Farming
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item py-2"
+                   routerLink="/soil">
+                  💧 Soil-Type
+                </a>
+              </li>
+
+            </ul>
+
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-white fw-semibold"
+               routerLink="/contact">
+              📞 Contact Us
+            </a>
+          </li>
+
+        </ul>
+
+        <!-- LOGIN SECTION -->
+        <div class="d-flex flex-wrap gap-3 align-items-center">
+
+          <!-- FARMER -->
+          <div class="card border-0 shadow-sm rounded-4 text-center px-3 py-2">
+
+            <div class="fw-bold text-success">
+              🌿 FARMER
+            </div>
+
+            <small>
+
+              <a routerLink="/farmer-login"
+                 class="text-decoration-none">
+                Login
+              </a>
+
+              |
+
+              <a routerLink="/farmer-register"
+                 class="text-decoration-none">
+                Register
+              </a>
+
+            </small>
+
+          </div>
+
+          <!-- CUSTOMER -->
+          <div class="card border-0 shadow-sm rounded-4 text-center px-3 py-2">
+
+            <div class="fw-bold text-primary">
+              👤 CUSTOMER
+            </div>
+
+            <small>
+
+              <a routerLink="/login"
+                 class="text-decoration-none">
+                Login
+              </a>
+
+              |
+
+              <a routerLink="/signUp"
+                 class="text-decoration-none">
+                Sign Up
+              </a>
+
+            </small>
+
+          </div>
+
+          <!-- DARK MODE -->
+          <button class="btn btn-dark rounded-circle shadow"
+                  style="width:45px;height:45px;"
+                  (click)="toggleDarkMode()">
+
+            🌙
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-grow-1 position-relative">
+
+    <router-outlet></router-outlet>
+
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+</div>

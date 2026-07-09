@@ -1,0 +1,45 @@
+/* MISSION & VISION */
+.mission-card,
+.vision-card{
+
+  background:white;
+
+  border-radius:25px;
+
+  padding:40px 30px;
+
+  transition:0.4s;
+
+  text-align:center;
+}
+
+.mission-card:hover,
+.vision-card:hover{
+
+  transform:translateY(-8px);
+
+  box-shadow:0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* ICONS */
+.mission-icon,
+.vision-icon{
+
+  width:90px;
+  height:90px;
+
+  margin:auto auto 25px;
+
+  border-radius:25px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-size:38px;
+
+  color:white;
+
+  background:
+  linear-gradient(135deg,#198754,#20c997);
+}

@@ -1,0 +1,40 @@
+
+> project-frontend@0.0.0 start
+> ng serve --host 127.0.0.1 --port 4200
+
+Initial chunk files | Names                       |  Raw size
+styles.css          | styles                      | 271.43 kB | 
+scripts.js          | scripts                     | 106.53 kB | 
+polyfills.js        | polyfills                   |  88.09 kB | 
+main.js             | main                        |  56.78 kB | 
+chunk-YKR6GNKS.js   | -                           |   7.64 kB | 
+chunk-6YDBPGQB.js   | -                           |   4.34 kB | 
+chunk-G2M4UP5K.js   | -                           |   1.28 kB | 
+chunk-QVEOFXOX.js   | -                           |   1.21 kB | 
+chunk-OLWQFVGL.js   | -                           | 153 bytes | 
+
+                    | Initial total               | 537.45 kB
+
+Lazy chunk files    | Names                       |  Raw size
+chunk-JN2WEAXH.js   | manage-product-component    |  20.72 kB | 
+chunk-KJXTL4IR.js   | cart-component              |  19.85 kB | 
+chunk-EHB3OOVA.js   | product-list-component      |  19.83 kB | 
+chunk-SSC24TSA.js   | forget-password-component   |  16.59 kB | 
+chunk-OPU2XBJA.js   | product-list-component      |  15.76 kB | 
+chunk-76CPYZ2D.js   | my-orders-component         |  15.68 kB | 
+chunk-FHIQQ2VC.js   | category-component          |  15.39 kB | 
+chunk-BN7TOMC2.js   | feedback-component          |  14.84 kB | 
+chunk-JE4YGDI2.js   | orders-component            |  13.79 kB | 
+chunk-PPVFFNDO.js   | view-orders-component       |  12.99 kB | 
+chunk-CUXXHM4H.js   | report-component            |  12.58 kB | 
+chunk-B3ETMUZ7.js   | f-dashboard-component       |  11.96 kB | 
+chunk-DJ5KW2U6.js   | payment-component           |  11.85 kB | 
+chunk-6TR4TYC6.js   | farmer-verify-otp-component |  11.16 kB | 
+chunk-OAAACOXT.js   | home-component              |  11.11 kB | 
+...and 24 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [2.634 seconds]
+
+Watch mode enabled. Watching for file changes...
+  ➜  Local:   http://127.0.0.1:4200/
+  ➜  press h + enter to show help

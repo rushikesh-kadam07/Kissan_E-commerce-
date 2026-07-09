@@ -1,0 +1,147 @@
+<div class="container-fluid p-0 bg-light min-vh-100">
+
+  <!-- TOP NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm py-3">
+
+    <div class="container-fluid px-4">
+
+      <!-- LOGO -->
+      <a class="navbar-brand fw-bold text-warning fs-3"
+         routerLink="/farmer/dashboard">
+
+        🌾 FARMER PANEL
+
+      </a>
+
+      <!-- TOGGLER -->
+      <button class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#farmerNavbar">
+
+        <span class="navbar-toggler-icon"></span>
+
+      </button>
+
+      <!-- NAV ITEMS -->
+      <div class="collapse navbar-collapse"
+           id="farmerNavbar">
+
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+
+          <!-- DASHBOARD -->
+          <li class="nav-item">
+
+            <a routerLink="/farmer/f-dashboard"
+               routerLinkActive="active"
+               class="nav-link text-white fw-semibold px-3 rounded-pill">
+
+              <i class="bi bi-house-door-fill me-2"></i>
+
+              Dashboard
+
+            </a>
+
+          </li>
+
+          <!-- POST PRODUCT -->
+          <li class="nav-item">
+
+            <a routerLink="/farmer/manage-product"
+               routerLinkActive="active"
+               class="nav-link text-white fw-semibold px-3 rounded-pill">
+
+              <i class="bi bi-plus-circle-fill me-2"></i>
+
+              Post Product
+
+            </a>
+
+          </li>
+
+          <!-- VIEW ORDERS -->
+          <li class="nav-item">
+
+            <a routerLink="/farmer/view-order"
+               routerLinkActive="active"
+               class="nav-link text-white fw-semibold px-3 rounded-pill">
+
+              <i class="bi bi-cart-check-fill me-2"></i>
+
+              View Orders
+
+            </a>
+
+          </li>
+
+          
+          
+
+          <!-- LOGOUT -->
+          <li class="nav-item ms-lg-3">
+
+            <button class="btn btn-warning text-dark fw-bold rounded-pill px-4 shadow-sm"
+                    (click)="logout()">
+
+              <i class="bi bi-box-arrow-right me-2"></i>
+
+              Logout
+
+            </button>
+
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+  <!-- HEADER -->
+  <div class="bg-white shadow-sm py-4 mb-4">
+
+    <div class="container-fluid px-4 d-flex justify-content-between align-items-center flex-wrap">
+
+      <div>
+
+        <h3 class="fw-bold text-success mb-1">
+          🌾 Farmer Dashboard
+        </h3>
+
+        <p class="text-muted mb-0">
+          Manage products and customer orders
+        </p>
+
+      </div>
+
+      <span class="badge bg-warning text-dark px-4 py-2 rounded-pill fs-6 shadow-sm">
+
+        Active
+
+      </span>
+
+    </div>
+
+  </div>
+
+  <!-- PAGE CONTENT -->
+  <div class="fluid px-4 pb-4">
+
+    <div class="card border-0 shadow-lg rounded-5">
+
+      <div class="card-body p-4">
+
+        <router-outlet></router-outlet>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+</div>

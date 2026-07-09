@@ -1,0 +1,245 @@
+<div class="container-fluid contact-bg py-4">
+
+  <div class="container">
+
+    <!-- HERO TEXT -->
+    <div class="text-center mb-4 hero-section">
+
+      <h1 class="display-5 fw-bold text-white">
+        📞 Contact Kisan Link
+      </h1>
+
+      <p class="lead text-light mt-2">
+        Smart Farming • Better Future • Farmer Support
+      </p>
+
+    </div>
+
+    <!-- CONTACT CARD -->
+    <div class="contact-wrapper mx-auto shadow-lg">
+
+      <div class="row g-0">
+
+        <!-- LEFT SIDE -->
+        <div class="col-lg-5">
+
+          <div class="left-box position-relative">
+
+            <!-- FLOATING SHAPES -->
+            <div class="circle-one"></div>
+            <div class="circle-two"></div>
+
+            <h2 class="fw-bold mb-3">
+              🌿 Let's Talk
+            </h2>
+
+            <p class="contact-text">
+              We are here to help farmers and customers
+              with smart agriculture services and support.
+            </p>
+
+            <!-- CONTACT INFO -->
+            <div class="contact-item">
+
+              <div class="icon-box">
+                <i class="bi bi-geo-alt-fill"></i>
+              </div>
+
+              <div>
+                <h6 class="mb-1 fw-bold">
+                  Address
+                </h6>
+
+                <small>
+                  Pune, Maharashtra, India
+                </small>
+              </div>
+
+            </div>
+
+            <div class="contact-item">
+
+              <div class="icon-box">
+                <i class="bi bi-telephone-fill"></i>
+              </div>
+
+              <div>
+                <h6 class="mb-1 fw-bold">
+                  Phone
+                </h6>
+
+                <small>
+                  +91 9876543210
+                </small>
+              </div>
+
+            </div>
+
+            <div class="contact-item">
+
+              <div class="icon-box">
+                <i class="bi bi-envelope-fill"></i>
+              </div>
+
+              <div>
+                <h6 class="mb-1 fw-bold">
+                  Email
+                </h6>
+
+                <small>
+                  supportkisanlink.com
+                </small>
+              </div>
+
+            </div>
+
+            <div class="contact-item">
+
+              <div class="icon-box">
+                <i class="bi bi-clock-fill"></i>
+              </div>
+
+              <div>
+                <h6 class="mb-1 fw-bold">
+                  Working Hours
+                </h6>
+
+                <small>
+                  Mon - Sat : 9 AM - 7 PM
+                </small>
+              </div>
+
+            </div>
+
+            <!-- IMAGE -->
+            <img src="/assets/images/farmer-contact.jpg"
+                 class="left-img"
+                 alt="Farmer">
+
+          </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="col-lg-7">
+
+          <div class="right-box">
+
+            <h2 class="form-title">
+              📩 Send Message
+            </h2>
+
+            <p class="text-muted mb-4">
+              Fill the form and our team will contact you soon.
+            </p>
+
+            <!-- FORM -->
+            <form #contactForm="ngForm"
+                  (ngSubmit)="save(contactForm.value)">
+
+              <div class="row">
+
+                <!-- NAME -->
+                <div class="col-md-6 mb-3">
+
+                  <label class="form-label fw-semibold">
+                    Full Name
+                  </label>
+
+                  <input type="text"
+                         class="form-control custom-input"
+                         placeholder="Enter your name"
+                         name="name"
+                         ngModel
+                         required>
+
+                </div>
+
+                <!-- EMAIL -->
+                <div class="col-md-6 mb-3">
+
+                  <label class="form-label fw-semibold">
+                    Email Address
+                  </label>
+
+                  <input type="email"
+                         class="form-control custom-input"
+                         placeholder="Enter your email"
+                         name="email"
+                         ngModel
+                         required>
+
+                </div>
+
+              </div>
+
+              <!-- CONTACT -->
+              <div class="mb-3">
+
+                <label class="form-label fw-semibold">
+                  Contact Number
+                </label>
+
+                <input type="number"
+                       class="form-control custom-input"
+                       placeholder="Enter contact number"
+                       name="contact"
+                       ngModel
+                       required>
+
+              </div>
+
+              <!-- SUBJECT -->
+              <div class="mb-3">
+
+                <label class="form-label fw-semibold">
+                  Subject
+                </label>
+
+                <input type="text"
+                       class="form-control custom-input"
+                       placeholder="Enter subject"
+                       name="subject"
+                       ngModel
+                       required>
+
+              </div>
+
+              <!-- MESSAGE -->
+              <div class="mb-4">
+
+                <label class="form-label fw-semibold">
+                  Message
+                </label>
+
+                <textarea rows="4"
+                          class="form-control custom-input"
+                          placeholder="Write your message..."
+                          name="message"
+                          ngModel
+                          required></textarea>
+
+              </div>
+
+              <!-- BUTTON -->
+              <button type="submit"
+                      class="btn submit-btn w-100"
+                      [disabled]="!contactForm.valid">
+
+                🚀 Send Message
+
+              </button>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,120 @@
+<div class="d-flex flex-column vh-100 bg-light main-wrapper">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm py-2">
+    <div class="container-fluid px-4">
+
+      <a class="navbar-brand fw-bold text-white fs-4"
+         routerLink="/customer/home">
+        🌾 Kisan <span class="text-warning">Link</span>
+      </a>
+
+      <button class="navbar-toggler border-0"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#customerNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse"
+           id="customerNavbar">
+
+        <!-- LEFT NAV LINKS -->
+        <ul class="navbar-nav mx-auto align-items-lg-center gap-lg-3">
+
+          <li class="nav-item">
+            <a class="nav-link fw-semibold px-2 text-white"
+               routerLink="/customer/home"
+               routerLinkActive="active-link">
+              🏠 Home
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link fw-semibold px-2 text-white"
+               routerLink="/customer/products"
+               routerLinkActive="active-link">
+              🛒 Products
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link fw-semibold px-2 text-white"
+               routerLink="/customer/cart"
+               routerLinkActive="active-link">
+              📦 Cart
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link fw-semibold px-2 text-white"
+               routerLink="/customer/myOrder"
+               routerLinkActive="active-link">
+              📦 Orders
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link fw-semibold px-2 text-white"
+               routerLink="/customer/feedback"
+               routerLinkActive="active-link">
+              ⭐ Feedback
+            </a>
+          </li>
+
+        </ul>
+
+        <!-- RIGHT SECTION -->
+        <div class="d-flex align-items-center ms-auto gap-3">
+
+          <!-- SEARCH -->
+          <div class="input-group search-box shadow-sm">
+
+            <span class="input-group-text bg-white border-0 px-2 py-1">
+              🔍
+            </span>
+
+            <input
+              type="search"
+              class="form-control border-0 search-input"
+              placeholder="Search"
+              [formControl]="searchControl">
+
+            <button
+              *ngIf="searchControl.value"
+              type="button"
+              class="btn btn-warning fw-bold border-0 px-2 py-1"
+              (click)="clearSearch()">
+              ✖
+            </button>
+
+          </div>
+
+          <!-- CUSTOMER NAME -->
+          <div class="customer-name-box shadow-sm">
+            👤 {{ customer?.name }}
+          </div>
+
+          <!-- LOGOUT -->
+          <button
+            class="btn btn-warning rounded-pill px-4 fw-semibold shadow-sm btn-sm"
+            (click)="logOut()">
+            Logout
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+  <main class="content-scroll d-flex flex-column">
+
+    <div class=" my-4 flex-grow-1">
+      <router-outlet></router-outlet>
+    </div>
+
+    <app-footer></app-footer>
+
+  </main>
+
+</div>

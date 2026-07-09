@@ -1,0 +1,309 @@
+<div class="container-fluid py-4 dashboard-bg">
+
+  <!-- HEADER -->
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+
+    <div>
+      <h2 class="fw-bold text-dark">
+        📊 Admin Dashboard
+      </h2>
+
+      <p class="text-muted mb-0">
+        Welcome back Admin
+      </p>
+    </div>
+
+    <button class="btn btn-success rounded-pill px-4">
+      <i class="fa fa-refresh"></i>
+      Refresh
+    </button>
+
+  </div>
+
+  <!-- TOP CARDS -->
+  <div class="row g-4">
+
+    <!-- ORDERS -->
+    <div class="col-lg-3 col-md-6">
+
+      <div class="simple-card border-start border-primary border-4">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+          <div>
+
+            <p class="text-muted mb-1">
+              Total Orders
+            </p>
+
+            <h3 class="fw-bold">
+              {{ data.totalOrders }}
+            </h3>
+
+          </div>
+
+          <div class="icon-circle bg-primary-subtle text-primary">
+
+            <i class="fa fa-shopping-cart"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- REVENUE -->
+    <div class="col-lg-3 col-md-6">
+
+      <div class="simple-card border-start border-success border-4">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+          <div>
+
+            <p class="text-muted mb-1">
+              Revenue
+            </p>
+
+            <h3 class="fw-bold">
+              ₹{{ data.totalRevenue }}
+            </h3>
+
+          </div>
+
+          <div class="icon-circle bg-success-subtle text-success">
+
+            <i class="fa fa-credit-card"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- PENDING -->
+    <div class="col-lg-3 col-md-6">
+
+      <div class="simple-card border-start border-warning border-4">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+          <div>
+
+            <p class="text-muted mb-1">
+              Pending
+            </p>
+
+            <h3 class="fw-bold">
+              {{ data.pendingOrders }}
+            </h3>
+
+          </div>
+
+          <div class="icon-circle bg-warning-subtle text-warning">
+
+            <i class="fa fa-hourglass-half"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- CUSTOMERS -->
+    <div class="col-lg-3 col-md-6">
+
+      <div class="simple-card border-start border-dark border-4">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+          <div>
+
+            <p class="text-muted mb-1">
+              Customers
+            </p>
+
+            <h3 class="fw-bold">
+              {{ data.totalCustomers }}
+            </h3>
+
+          </div>
+
+          <div class="icon-circle bg-dark-subtle text-dark">
+
+            <i class="fa fa-users"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- SECOND ROW -->
+  <div class="row g-4 mt-1">
+
+    <!-- ORDER STATUS -->
+    <div class="col-lg-6">
+
+      <div class="dashboard-box">
+
+        <h5 class="fw-bold mb-4">
+          🚚 Order Status
+        </h5>
+
+        <div class="status-row">
+
+          <span>
+            Confirmed
+          </span>
+
+          <span class="badge bg-success">
+            {{ data.confirmed }}
+          </span>
+
+        </div>
+
+        <div class="status-row">
+
+          <span>
+            In Process
+          </span>
+
+          <span class="badge bg-primary">
+            {{ data.inProcess }}
+          </span>
+
+        </div>
+
+        <div class="status-row">
+
+          <span>
+            Dispatch
+          </span>
+
+          <span class="badge bg-info">
+            {{ data.dispatch }}
+          </span>
+
+        </div>
+
+        <div class="status-row">
+
+          <span>
+            Delivered
+          </span>
+
+          <span class="badge bg-success">
+            {{ data.delivered }}
+          </span>
+
+        </div>
+
+        <div class="status-row">
+
+          <span>
+            Rejected
+          </span>
+
+          <span class="badge bg-danger">
+            {{ data.rejected }}
+          </span>
+
+        </div>
+
+        <div class="status-row border-0">
+
+          <span>
+            Cancelled
+          </span>
+
+          <span class="badge bg-dark">
+            {{ data.cancelled }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- PAYMENT -->
+    <div class="col-lg-6">
+
+      <div class="dashboard-box">
+
+        <h5 class="fw-bold mb-4">
+          💳 Payment Overview
+        </h5>
+
+        <div class="payment-box bg-success-subtle">
+
+          <div>
+
+            <h6 class="mb-1">
+              Paid
+            </h6>
+
+            <h3 class="fw-bold">
+              {{ data.paid }}
+            </h3>
+
+          </div>
+
+          <i class="fa fa-check-circle text-success payment-icon"></i>
+
+        </div>
+
+        <div class="payment-box bg-warning-subtle">
+
+          <div>
+
+            <h6 class="mb-1">
+              Pending
+            </h6>
+
+            <h3 class="fw-bold">
+              {{ data.pendingPayments }}
+            </h3>
+
+          </div>
+
+          <i class="fa fa-hourglass-half text-warning payment-icon"></i>
+
+        </div>
+
+        <div class="payment-box bg-danger-subtle mb-0">
+
+          <div>
+
+            <h6 class="mb-1">
+              Refund
+            </h6>
+
+            <h3 class="fw-bold">
+              {{ data.refundPayments }}
+            </h3>
+
+          </div>
+
+          <i class="fa fa-undo text-danger payment-icon"></i>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

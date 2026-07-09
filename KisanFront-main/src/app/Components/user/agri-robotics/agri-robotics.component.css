@@ -1,0 +1,22 @@
+body {
+  background: linear-gradient(to right, #eef7f0, #f4f9ff);
+}
+
+.hero {
+  background: url('https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=1400') center/cover no-repeat;
+  height: 65vh;
+}
+
+.img-fixed {
+  height: 220px;
+  object-fit: cover;
+}
+
+.hover-card {
+  transition: 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}

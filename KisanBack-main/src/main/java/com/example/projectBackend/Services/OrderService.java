@@ -1,0 +1,409 @@
+package com.example.projectBackend.Services;
+
+import com.example.projectBackend.DTO.FarmerOrderDTO;
+import com.example.projectBackend.DTO.OrderItemDTO;
+import com.example.projectBackend.DTO.OrderRequestDTO;
+import com.example.projectBackend.Entity.*;
+import com.example.projectBackend.Repository.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.stream.Collectors;
+
+@Service
+public class OrderService {
+    private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private PaymentRepository paymentRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private CartRepository cartRepository;
+
+    @Autowired
+    private  CustomerRepository customerRepository;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private InvoiceService invoiceService;
+
+    @Autowired
+    private StripeService stripeService;
+
+
+
+    @Transactional
+    public ResponseEntity<?>placeOrder(OrderRequestDTO request){
+        Order order=new Order();
+
+        Optional<Customer>byId=customerRepository.findById(request.getCustomerId());
+
+        if (byId.isPresent()){
+            Customer customer=byId.get();
+            order.setCustomer(customer);
+        }
+        else {
+            return new ResponseEntity<>("Customer not Found", HttpStatus.NOT_FOUND);
+        }
+
+        List<OrderItem> orderItems = new ArrayList<>();
+        double total = 0.0;
+
+        for(OrderItemDTO it:request.getItems()){
+            Product product = productRepository.findById(it.getProductId()).get();
+
+            OrderItem oi = new OrderItem();
+            oi.setProductId(product.getId());
+            oi.setProduct(product);
+            oi.setProductName(product.getProduct_name());
+            oi.setQuantity(it.getQuantity());
+            oi.setPrice(product.getPrice());
+            oi.setTotal(product.getPrice() * it.getQuantity());
+            oi.setFarmerId(product.getFarmer() != null ? product.getFarmer().getId() : null);
+            if (product.getImages() != null && !product.getImages().isEmpty()) {
+                oi.setImageUrl(product.getImages().get(0).getImageUrl());
+            }
+
+
+            orderItems.add(oi);
+
+            product.setStock(product.getStock() - it.getQuantity());
+            productRepository.save(product);
+
+            total +=oi.getTotal();
+        }
+
+        order.setStatus("IN_PROCESS");
+        order.setTotalAmount(total);
+
+        ShippingInfo s = new ShippingInfo();
+        if(request.getShipping() != null){
+            s.setName(request.getShipping().getName());
+            s.setAddress(request.getShipping().getAddress());
+            s.setCity(request.getShipping().getCity());
+            s.setContact(request.getShipping().getContact());
+            s.setPinCode(request.getShipping().getPinCode());
+        }
+
+        order.setShipping(s);
+        order.setItems(orderItems);
+
+        Order savedOrder = orderRepository.save(order);
+
+
+        //payment
+        Payment payment = new Payment();
+        payment.setOrder(savedOrder);
+        payment.setTotalAmount(total);
+
+        double gstPercent = request.getGstPercent() != null ? request.getGstPercent() : 0;
+        double discountPercent = request.getDiscountPercent() != null ? request.getDiscountPercent() : 0;
+
+        double gst = total * gstPercent /100;
+        double discount = total* discountPercent /100;
+
+        payment.setGstPercent(gstPercent);
+        payment.setDiscountPercent(discountPercent);
+        payment.setGstAmount(gst);
+        payment.setDiscountAmount(discount);
+
+        double netAmount = total+gst -discount;
+//        payment.setNetAmount(discount);
+        payment.setNetAmount(netAmount);//newly added
+
+        payment.setStatus("PENDING");
+
+        Payment savedPayment = paymentRepository.save(payment);
+        savedOrder.setPayment(savedPayment);
+
+        sendOrderEmailWithInvoice(savedOrder);
+
+        return new ResponseEntity<>(savedOrder,HttpStatus.CREATED);
+
+
+
+    }
+
+
+    public ResponseEntity<?> getOrderByCustomer(Long customerId){
+        List<Order> byCustomerId = orderRepository.findByCustomer_Id(customerId);
+        return ResponseEntity.ok(byCustomerId);
+    }
+    public List<Order> getAllOrders(){
+        return orderRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Order> getOrdersByFarmer(Long farmerId) {
+        return orderRepository.findOrdersByFarmerId(farmerId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<FarmerOrderDTO> getFarmerOrderDetails(Long farmerId) {
+        return orderRepository.findOrdersByFarmerId(farmerId)
+                .stream()
+                .flatMap(order -> order.getItems().stream()
+                        .filter(item -> isFarmerOrderItem(item, farmerId))
+                        .map(item -> toFarmerOrderDTO(order, item)))
+                .collect(Collectors.toList());
+    }
+
+    private boolean isFarmerOrderItem(OrderItem item, Long farmerId) {
+        if (item.getProduct() != null && item.getProduct().getFarmer() != null) {
+            return farmerId.equals(item.getProduct().getFarmer().getId());
+        }
+        return farmerId.equals(item.getFarmerId());
+    }
+
+    private FarmerOrderDTO toFarmerOrderDTO(Order order, OrderItem item) {
+        Customer customer = order.getCustomer();
+        Payment payment = order.getPayment();
+
+        return new FarmerOrderDTO(
+                order.getId(),
+                order.getOrderDate(),
+                order.getStatus(),
+                payment != null ? payment.getStatus() : "PENDING",
+                customer != null ? customer.getId() : null,
+                customer != null ? customer.getName() : null,
+                customer != null ? customer.getEmail() : null,
+                customer != null ? customer.getContact() : null,
+                item.getProductId(),
+                item.getProductName(),
+                item.getImageUrl(),
+                item.getQuantity(),
+                item.getPrice(),
+                item.getTotal()
+        );
+    }
+
+    public ResponseEntity<?> updateStatus(Long id,String status){
+        Order order = orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
+        Payment payment = order.getPayment();
+        if(status.equalsIgnoreCase("Delivered")&& payment.getPaymentMethod().equalsIgnoreCase("COD")){
+            order.setStatus(status);
+            payment.setStatus("SUCCESS");
+            paymentRepository.save(payment);
+        }
+        order.setStatus(status);
+        Order save = orderRepository.save(order);
+        return ResponseEntity.ok(save);
+
+
+    }
+
+    public List<String> getAllCities(){
+        return orderRepository.findDistinctCities();
+    }
+
+    public List<Order> filters(String fromDate,String toDate,String city){
+        LocalDateTime from = null;
+        LocalDateTime  to = null;
+
+        if(fromDate != null && !fromDate.isBlank()){
+            from = LocalDate.parse(fromDate).atStartOfDay();
+        }
+
+        if(toDate != null && !toDate.isBlank()){
+            to = LocalDate.parse(toDate).atTime(23,59,59);
+        }
+
+        boolean hasDate = from !=null && to !=null;
+        boolean hasCity = city != null&& !city.isBlank();
+
+        if(hasDate && hasCity){
+            return  orderRepository.findByOrderDateBetweenAndShippingCityIgnoreCase(from,to,city);
+        }
+
+        if(hasDate){
+            return orderRepository.findByOrderDateBetween(from,to);
+        }
+        if(hasCity){
+            return orderRepository.findByShippingCityIgnoreCase(city);
+        }
+
+        return  orderRepository.findAll();
+    }
+
+
+    @Transactional
+    public Order cancleOrder(long id){
+        Order order =orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
+    if
+    (order.getStatus().equals("DISPATCH") || order.getStatus().equals("DELIVERED")
+    ){
+        throw new RuntimeException("Order can not be Cancaelled");
+    }
+
+    Payment payment=paymentRepository.findByOrder_Id(id).orElseThrow(null);
+
+    //restore the stock
+
+        for (OrderItem item : order.getItems()) {
+            Product p = productRepository.findById(item.getProductId())
+                    .orElseThrow();
+
+            p.setStock(p.getStock() + item.getQuantity());
+
+            productRepository.save(p);
+        }
+
+        String email = order.getCustomer().getEmail();
+        String subject;
+        String body;
+
+
+        //card Refund
+
+        if(
+                payment !=null && "SUCCESS".equals(payment.getStatus()) && "Card".equalsIgnoreCase(payment.getPaymentMethod())
+
+        )
+        {
+
+            try {
+                stripeService.refundPayment(payment.getTransactionRef());
+                payment.setStatus("REFUNDED");
+                paymentRepository.save(payment);
+
+            } catch (Exception e) {
+                throw new RuntimeException("Refund failed");
+            }
+
+            subject = "Order Cancelled & Refund Initiated";
+            body =
+                    "Hello " + order.getCustomer().getName() + ",\n\n" +
+                            "Your order #" + order.getId() + " has been cancelled.\n\n" +
+                            " Since you paid via Card, your refund has been initiated.\n" +
+                            "It will be credited within 2-3 business days.\n\n" +
+                            "Thank you for shopping with us.";
+
+            emailService.sendSimpleEmail(email, subject, body);
+        }
+
+//  COD PAYMENT
+        if (
+                payment != null &&
+                        "COD".equalsIgnoreCase(payment.getPaymentMethod())
+        ) {
+
+            payment.setStatus("CANCELLED");
+            paymentRepository.save(payment);
+
+            subject = "Order Cancelled";
+            body =
+                    "Hello " + order.getCustomer().getName() + ",\n\n" +
+                            "Your order #" + order.getId() + " has been cancelled successfully.\n\n" +
+                            " Since this was Cash on Delivery, no payment was charged.\n\n" +
+                            "We hope to serve you again.";
+
+            emailService.sendSimpleEmail(email, subject, body);
+        }
+
+        order.setStatus("CANCELLED");
+
+        return orderRepository.save(order);
+    }
+
+    public Map<String,Object>getDashboard(){
+        List<Order> orders =orderRepository.findAll();
+        List<Customer> customers=customerRepository.findAll();
+        List<Payment>payments=paymentRepository.findAll();
+
+        Map<String,Object> data=new HashMap<>();
+
+        data.put("totalOrders",orders.size());
+        data.put("totalCustomers",customers.size());
+
+        double revenue =payments.stream()
+                .filter(p->"SUCCESS".equals(p.getStatus()))
+                .mapToDouble(Payment::getNetAmount).sum();
+
+        data.put("totalRevenue",revenue);
+
+        long pendingOrders = orders.stream()
+                .filter(o->o.getStatus().equals("IN_PROCESS")).count();
+
+        data.put("inprocess",orders.stream()
+                .filter(o->o.getStatus().equals("IN_PROCESS")).count());
+
+
+        data.put("confirm",orders.stream()
+                .filter(o->o.getStatus().equals("CONFIRMED"))
+                .count());
+
+        data.put("dispatch",orders.stream()
+                .filter(o->o.getStatus().equals("DISPATCH"))
+                .count());
+
+
+
+        data.put("delivered",orders.stream()
+                .filter(o->o.getStatus().equals("DELIVERED"))
+                .count());
+
+
+        data.put("rejected",orders.stream()
+                .filter(o->o.getStatus().equals("REJECT"))
+                .count());
+
+        data.put("cancelled",orders.stream()
+                .filter(o->o.getStatus().equals("CANCELLED"))
+                .count());
+
+        data.put("paid",payments.stream()
+                .filter(p->p.getStatus().equals("SUCCESS"))
+                .count());
+
+        data.put("pendingPayments",payments.stream()
+                .filter(p->p.getStatus().equals("PENDING"))
+                .count());
+
+        data.put("refundPayments",payments.stream()
+                .filter(p->p.getStatus().equals("REFUNDED"))
+                .count());
+
+        return data;
+    }
+
+    private void sendOrderEmailWithInvoice(Order order) {
+        try {
+            if (order.getCustomer() == null || order.getCustomer().getEmail() == null || order.getCustomer().getEmail().isBlank()) {
+                logger.warn("Order email skipped for order {} because customer email is missing", order.getId());
+                return;
+            }
+
+            logger.info("Preparing order confirmation email for order {} to {}", order.getId(), order.getCustomer().getEmail());
+            byte[] pdf = invoiceService.generateInvoice(order);
+
+            if (pdf == null || pdf.length == 0) {
+                logger.warn("Invoice PDF is empty for order {}. Sending confirmation email without attachment.", order.getId());
+                emailService.sendMail(order.getCustomer().getEmail(), order.getId());
+                return;
+            }
+
+            emailService.sendOrderInvoiceEmail(order, pdf);
+        } catch (Exception e) {
+            logger.error("Order saved but invoice email preparation failed for order {}", order.getId(), e);
+            emailService.sendMail(order.getCustomer().getEmail(), order.getId());
+        }
+    }
+}
+
+

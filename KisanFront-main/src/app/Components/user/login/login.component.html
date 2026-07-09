@@ -1,0 +1,96 @@
+<div class="d-flex justify-content-center align-items-center min-vh-100 login-bg">
+
+  <div class="card login-card shadow-lg border-0">
+
+    <div class="card-body p-4">
+
+      <h3 class="text-center mb-4 fw-bold text-gradient">
+        🔐 Welcome Back
+      </h3>
+
+      <!-- ERROR -->
+      <div *ngIf="error"
+           class="alert alert-danger text-center">
+
+        {{ error }}
+
+      </div>
+
+      <!-- EMAIL -->
+      <div class="mb-3">
+
+        <label class="form-label fw-semibold">
+          Email
+        </label>
+
+        <input type="email"
+               [(ngModel)]="loginRequest.email"
+               class="form-control input-custom"
+               placeholder="Enter your email" />
+
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="mb-2">
+
+        <label class="form-label fw-semibold">
+          Password
+        </label>
+
+        <input type="password"
+               [(ngModel)]="loginRequest.password"
+               class="form-control input-custom"
+               placeholder="Enter your password" />
+
+      </div>
+
+      <!-- FORGET PASSWORD -->
+      <div class="text-end mb-3">
+
+        <a routerLink="/forget"
+           class="link-hover small fw-semibold">
+
+          Forgot Password?
+
+        </a>
+
+      </div>
+
+      <!-- LOGIN BUTTON -->
+      <button (click)="login()"
+              class="btn btn-success w-100 rounded-pill login-btn">
+
+        🚀 Login
+
+      </button>
+
+      <!-- REGISTER LINKS -->
+      <div class="text-center mt-4 register-links">
+
+        <p class="mb-1">
+          Don't have an account?
+        </p>
+
+        <a routerLink="/signUp"
+           class="link-hover">
+
+          Customer Register
+
+        </a>
+
+        <span class="mx-2">|</span>
+
+        <a routerLink="/farmer-register"
+           class="link-hover">
+
+          Farmer Register
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
